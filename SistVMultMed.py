@@ -1,4 +1,4 @@
-#Tercera version - 2 elementos contenedores de mascotas (caninos y felinos) dadas por diccionarios 
+#Cuarta version - que la fecha se ingrese como dd/mm/aaaa y que ingresarla de otra manera sea error 
 from datetime import datetime
 class Medicamento:
     def __init__(self):
