@@ -1,4 +1,4 @@
-#Cuarta version - que la fecha se ingrese como dd/mm/aaaa y que ingresarla de otra manera sea error 
+#Quinta version - Eliminar el medicamento de una mascota 
 from datetime import datetime
 class Medicamento:
     def __init__(self):
@@ -51,6 +51,13 @@ class Mascota:
     def asignarLista_Medicamentos(self,n):
         self.__lista_medicamentos = n 
     
+    def eliminarMedicamento(self, nombre_medicamento):
+        for m in self.__lista_medicamentos:
+            if m.verNombre().lower() == nombre_medicamento.lower():
+                self.__lista_medicamentos.remove(m)
+                return True  # Se eliminó
+        return False  # No se encontró
+    
 class sistemaV:
     class sistemaV:
         def __init__(self):
@@ -93,6 +100,12 @@ class sistemaV:
             del self.__felinos[historia]
             return True
         return False
+    
+    def eliminarMedicamentoDeMascota(self, historia, nombre_medicamento):
+        for masc in self.__lista_mascotas:
+            if masc.verHistoria() == historia:
+                return masc.eliminarMedicamento(nombre_medicamento)
+        return False
 
 def main():
     servicio_hospitalario = sistemaV()
@@ -103,8 +116,9 @@ def main():
                        \n2- Ver fecha de ingreso 
                        \n3- Ver número de mascotas en el servicio 
                        \n4- Ver medicamentos que se están administrando
-                       \n5- Eliminar mascota 
-                       \n6- Salir 
+                       \n5- Eliminar mascota
+                       \n6- Eliminar medicamento de una mascota
+                       \n7- Salir 
                        \nUsted ingresó la opción: ''' ))
         if menu==1: # Ingresar una mascota 
             if servicio_hospitalario.verNumeroMascotas() >= 10:
@@ -191,8 +205,17 @@ def main():
                 print("Mascota eliminada del sistema con exito")
             else:
                 print("No se ha podido eliminar la mascota")
-        
+            
         elif menu==6:
+            historia = int(input("Ingrese la historia clínica de la mascota: "))
+            nombre_medicamento = input("Ingrese el nombre del medicamento a eliminar: ")
+            resultado = servicio_hospitalario.eliminarMedicamentoDeMascota(historia, nombre_medicamento)
+            if resultado:
+                print(" Medicamento eliminado con éxito.")
+            else:
+                print(" No se encontró el medicamento o la historia clínica.") 
+
+        elif menu==7:
             print("Usted ha salido del sistema de servicio de hospitalización...")
             break
         
