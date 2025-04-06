@@ -1,4 +1,4 @@
-#Primera version - sin modificaciones
+#Segunda version - No se puede ingresar dos medicamentos con el mismo nombre
 class Medicamento:
     def __init__(self):
         self.__nombre = "" 
@@ -115,9 +115,21 @@ def main():
                 nm=int(input("Ingrese cantidad de medicamentos: "))
                 lista_med=[]
 
-                for i in range(0,nm):
-                    nombre_medicamentos = input("Ingrese el nombre del medicamento: ")
-                    dosis =int(input("Ingrese la dosis: "))
+                for i in range(nm):
+                    while True:
+                        nombre_medicamentos = input("Ingrese el nombre del medicamento: ")
+                        # Verificar si ya existe ese nombre en la lista
+                        nombre_repetido = False
+                        for med in lista_med:
+                            if med.verNombre().lower() == nombre_medicamentos.lower():
+                                nombre_repetido = True
+                                break
+                        if nombre_repetido:
+                            print("Este medicamento ya fue ingresado. Ingrese uno diferente.")
+                        else:
+                            break  
+
+                    dosis = int(input("Ingrese la dosis: "))
                     medicamento = Medicamento()
                     medicamento.asignarNombre(nombre_medicamentos)
                     medicamento.asignarDosis(dosis)
